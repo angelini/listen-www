@@ -34,5 +34,6 @@ require.config({
 });
 
 require(['App'], function(App) {
-  (new App()).start();
+  window.App = new App();
+  window.App.start();
 });
