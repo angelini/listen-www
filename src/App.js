@@ -8,7 +8,7 @@ define([
 function(Cola, ApiClient, User) {
 
   function App() {
-    this.client = new ApiClient('http://localhost:8080');
+    this.client = new ApiClient('http://localhost:8000');
     this.router = new Cola.Router();
   }
 
