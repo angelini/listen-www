@@ -2,7 +2,7 @@ define([
   'Cola',
 
   'ApiClient',
-  'User',
+  'models/User',
 ],
 
 function(Cola, ApiClient, User) {
