@@ -9,6 +9,7 @@
   <div id="main"></div>
 
   <script id="tmpl_login_form" type="text/x-template">
+    <div data-bind="error"></div>
     <form data-event="submit:login">
       <label>Email
         <input type="text" name="email" data-bind="email"/>
@@ -18,6 +19,12 @@
       </label>
       <input type="submit" value="Login"/>
     </form>
+  </script>
+
+  <script id="tmpl_feed" type="text/x-template">
+    <h4>Feed</h4>
+    <div data-bind="error"></div>
+    <div data-bind="feed"></div>
   </script>
 </body>
 </html>

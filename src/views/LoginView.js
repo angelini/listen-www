@@ -1,19 +1,15 @@
 define([
-  'Cola'
+  'Cola',
+  'views/ViewUtils'
 ],
 
-function(Cola) {
+function(Cola, ViewUtils) {
 
   var TEMPLATE = 'tmpl_login_form';
 
-  var loadTemplate = function(name) {
-    var container = document.createElement('div');
-    return $(container).html($('#' + name).html());
-  };
-
   function LoginView(controller) {
     this.controller = controller;
-    this.$node      = loadTemplate(TEMPLATE);
+    this.$node      = ViewUtils.loadTemplate(TEMPLATE);
     this.parser     = new Cola.Parser(this.$node[0]);
   }
 
@@ -30,19 +26,20 @@ function(Cola) {
   };
 
   LoginView.prototype.login = function(node, event, context) {
-    var email    = context.lookup('email').get(),
-        password = context.lookup('password').get();
+    var error    = context.lookup('error'),
+        email    = context.lookup('email'),
+        password = context.lookup('password');
 
-    if (!email) {
-      return context.error.set('Email Required');
+    if (!email.get()) {
+      return error.set('Email Required');
     }
 
-    if (!password) {
-      return context.error.set('Password Required');
+    if (!password.get()) {
+      return error.set('Password Required');
     }
 
-    this.controller.login(email, password, function(err) {
-      context.error.set(err.error);
+    this.controller.login(email.get(), password.get(), function(err) {
+      error.set(err.error);
     });
   };
 

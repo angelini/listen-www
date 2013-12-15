@@ -22,7 +22,7 @@ function(_, $, Cola) {
 
     $.ajax(_.extend({
       success: function(response) { callback(null, response); },
-      error:   function(error)    { callback(error); }
+      error:   function(error)    { callback(error.responseJSON); }
     }, DEFAULT_OPTIONS, options));
   };
 

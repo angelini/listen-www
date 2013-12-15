@@ -1,10 +1,9 @@
 define([
-  'Cola',
   'models/User',
   'views/LoginView'
 ],
 
-function(Cola, User, LoginView) {
+function(User, LoginView) {
 
   function LoginController(client, $container) {
     this.client     = client;

@@ -8,11 +8,16 @@ function(Cola, Song) {
   function User(id, email) {
     this.id    = new Cola.Property(id);
     this.email = new Cola.Property(email);
+
+    this.friends = new Cola.Property([]);
+    this.feed    = new Cola.Property([]);
   }
 
   User.login = function(client, email, password, callback) {
     client.login(email, password, function(err, response) {
-      callback(err, new User(response.id, email));
+      if (err) return callback(err);
+
+      callback(null, new User(response.id, email));
     });
   };
 
@@ -20,23 +25,21 @@ function(Cola, Song) {
     var self = this;
 
     client.loadFriends(this.id.get(), function(err, response) {
-      if (err) {
-        return callback(err);
-      }
+      if (err) return callback(err);
 
       var friends = response.map(function(friend) { return new User(friend.id, friend.email); });
-      callback(err, self.friends = new Cola.Property(friends));
+      callback(null, self.friends.set(friends));
     });
   };
 
   User.prototype.loadFeed = function(client, callback) {
+    var self = this;
+
     client.loadFeed(this.id.get(), function(err, response) {
-      if (err) {
-        return callback(err);
-      }
+      if (err) return callback(err);
 
       var feed = response.map(function(song) { return new Song(song.id, song.url, song.ratings); });
-      callback(err, self.feed = new Cola.Property(feed));
+      callback(null, self.feed.set(feed));
     });
   };
 

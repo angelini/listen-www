@@ -3,10 +3,11 @@ define([
   'Cola',
 
   'ApiClient',
-  'controllers/LoginController'
+  'controllers/LoginController',
+  'controllers/FeedController'
 ],
 
-function($, Cola, ApiClient, LoginController) {
+function($, Cola, ApiClient, LoginController, FeedController) {
 
   function App() {
     this.$container = $('#main');
@@ -17,10 +18,11 @@ function($, Cola, ApiClient, LoginController) {
   }
 
   App.prototype.start = function() {
-    var loginController = new LoginController(this.client, this.$container);
+    var loginController = new LoginController(this.client, this.$container),
+        feedController  = new FeedController(this.client, this.$container);
 
     this.router.addRoute('/', loginController.loginRoute.bind(loginController));
-    this.router.addRoute('/feed', function() { console.log('feed'); });
+    this.router.addRoute('/feed', feedController.feedRoute.bind(feedController));
 
     this.router.route('/');
   };
