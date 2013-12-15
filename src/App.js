@@ -3,50 +3,24 @@ define([
   'Cola',
 
   'ApiClient',
-  'models/User',
-  'views/LoginView'
+  'controllers/LoginController'
 ],
 
-function($, Cola, ApiClient, User, LoginView) {
-
-  var $main = $('#main');
+function($, Cola, ApiClient, LoginController) {
 
   function App() {
+    this.$container = $('#main');
+
     this.client = new ApiClient('http://localhost:8000');
     this.router = new Cola.Router();
+    this.user   = new Cola.Property();
   }
 
   App.prototype.start = function() {
-    var self = this;
+    var loginController = new LoginController(this.client, this.$container);
 
-    this.router.addRoute('/', function() {
-      var view = new LoginView(),
-          context = { email: new Cola.Property(),
-                      password: new Cola.Property(),
-                      error: new Cola.Property() };
-
-      context.login = function(node, event) {
-        User.login(self.client, context.email.get(), context.password.get(), function(err, user) {
-          console.log('err', err);
-          console.log('user', user);
-
-          if (err) {
-            context.error.set(err);
-          } else {
-            self.user = user;
-            self.router.route('/feed');
-          }
-        });
-      };
-
-      $main.html(view.render(new Cola.Context(context)));
-    });
-
-    this.router.addRoute('/feed', function() {
-      if (!self.user) {
-        return self.router.route('/');
-      }
-    });
+    this.router.addRoute('/', loginController.loginRoute.bind(loginController));
+    this.router.addRoute('/feed', function() { console.log('feed'); });
 
     this.router.route('/');
   };
