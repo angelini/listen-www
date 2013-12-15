@@ -4,22 +4,7 @@ require.config({
   paths: {
     jQuery:     '../vendor/jquery',
     underscore: '../vendor/underscore',
-
-    eventemitter2:    '../vendor/cola.js/vendor/eventemitter2',
-
-    PropertyStack:    '../vendor/cola.js/src/PropertyStack',
-    Property:         '../vendor/cola.js/src/Property',
-    ComputedProperty: '../vendor/cola.js/src/ComputedProperty',
-
-    Keypath:          '../vendor/cola.js/src/Keypath',
-    Binding:          '../vendor/cola.js/src/Binding',
-    Parser:           '../vendor/cola.js/src/Parser',
-
-    RouteNode:        '../vendor/cola.js/src/RouteNode',
-    RouteTree:        '../vendor/cola.js/src/RouteTree',
-    Router:           '../vendor/cola.js/src/Router',
-
-    Cola:             '../vendor/cola.js/src/Cola'
+    Cola:       '../vendor/cola'
   },
 
   shim: {
@@ -33,7 +18,9 @@ require.config({
   }
 });
 
-require(['App'], function(App) {
-  window.App = new App();
-  window.App.start();
+require(['Cola', 'App'], function(Cola, App) {
+  window.Cola = Cola;
+
+  window.app = new App();
+  window.app.start();
 });

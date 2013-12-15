@@ -7,5 +7,17 @@
 </head>
 <body>
   <div id="main"></div>
+
+  <script id="tmpl_login_form" type="text/x-template">
+    <form data-event="submit:login">
+      <label>Email
+        <input type="text" name="email" data-bind="email"/>
+      </label>
+      <label>Password
+        <input type="password" name="password" data-bind="password"/>
+      </label>
+      <input type="submit" value="Login"/>
+    </form>
+  </script>
 </body>
 </html>

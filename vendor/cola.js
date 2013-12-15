@@ -1,1 +1,1 @@
-../../cola.js
+../../cola.js/dist/cola.js
