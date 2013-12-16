@@ -25,10 +25,6 @@ function(FeedView) {
     this.$container.html(view.render(user.feed, error));
   };
 
-  FeedController.prototype.loadFeed = function(callback) {
-    User.loadFeed(this.client, callback);
-  };
-
   return FeedController;
 
 });
