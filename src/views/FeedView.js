@@ -19,7 +19,7 @@ function(Cola, ViewUtils) {
       error: error
     };
 
-    this.parser.parse(new Cola.Context(context));
+    this.parser.parse(context);
     return this.$node;
   };
 

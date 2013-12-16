@@ -24,7 +24,11 @@
   <script id="tmpl_feed" type="text/x-template">
     <h4>Feed</h4>
     <div data-bind="error"></div>
-    <div data-bind="feed"></div>
+    <ul>
+      <li data-iterator="song:feed">
+        <div data-bind="song.url"></div>
+      </li>
+    </ul>
   </script>
 </body>
 </html>
