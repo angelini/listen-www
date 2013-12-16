@@ -21,25 +21,21 @@ function(Cola, ViewUtils) {
       login: this.login.bind(this)
     };
 
-    this.parser.parse(new Cola.Context(context));
+    this.parser.parse(context);
     return this.$node;
   };
 
   LoginView.prototype.login = function(node, event, context) {
-    var error    = context.lookup('error'),
-        email    = context.lookup('email'),
-        password = context.lookup('password');
-
-    if (!email.get()) {
+    if (!context.email.get()) {
       return error.set('Email Required');
     }
 
-    if (!password.get()) {
+    if (!context.password.get()) {
       return error.set('Password Required');
     }
 
-    this.controller.login(email.get(), password.get(), function(err) {
-      error.set(err.error);
+    this.controller.login(context.email.get(), context.password.get(), function(err) {
+      context.error.set(err.error);
     });
   };
 
