@@ -17,12 +17,16 @@ function($, Cola, ApiClient, LoginController, FeedController) {
     this.user   = new Cola.Property();
   }
 
+  App.prototype.loadHTML = function(name) {
+    return $('#' + name).html();
+  };
+
   App.prototype.start = function() {
     var loginController = new LoginController(this.client, this.$container),
         feedController  = new FeedController(this.client, this.$container);
 
-    this.router.addRoute('/', loginController.loginRoute.bind(loginController));
-    this.router.addRoute('/feed', feedController.feedRoute.bind(feedController));
+    this.router.addRoute('/', loginController.login.bind(loginController));
+    this.router.addRoute('/feed', feedController.feed.bind(feedController));
 
     this.router.route('/');
   };

@@ -1,28 +1,27 @@
 define([
-  'views/FeedView'
+  'components/SongList',
+  'components/FriendList'
 ],
 
-function(FeedView) {
+function(SongList, FriendList) {
 
   function FeedController(client, $container) {
     this.client     = client;
     this.$container = $container;
   }
 
-  FeedController.prototype.feedRoute = function() {
-    var user  = app.user.get(),
-        error = new Cola.Property();
-
-    if (!user) {
+  FeedController.prototype.feed = function() {
+    if (!app.user.get()) {
       return app.router.route('/');
     }
 
-    user.loadFeed(this.client, function(err, feed) {
-      if (err) error.set(err.error);
-    });
+    var songList   = new SongList(this, this.client),
+        friendList = new FriendList(this, this.client);
 
-    var view = new FeedView(this);
-    this.$container.html(view.render(user.feed, error));
+    this.$container.html(app.loadHTML('layt_feed'));
+
+    songList.attach(this.$container.find('.song_list'));
+    friendList.attach(this.$container.find('.friend_list'));
   };
 
   return FeedController;

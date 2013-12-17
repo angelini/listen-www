@@ -1,27 +1,20 @@
 define([
   'models/User',
-  'views/LoginView'
+  'components/LoginForm'
 ],
 
-function(User, LoginView) {
+function(User, LoginForm) {
 
   function LoginController(client, $container) {
     this.client     = client;
     this.$container = $container;
   }
 
-  LoginController.prototype.loginRoute = function() {
-    var view = new LoginView(this);
-    this.$container.html(view.render());
-  };
+  LoginController.prototype.login = function() {
+    var loginForm = new LoginForm(this, this.client);
 
-  LoginController.prototype.login = function(email, password, callback) {
-    User.login(this.client, email, password, function(err, user) {
-      if (err) return callback(err);
-
-      app.user.set(user);
-      app.router.route('/feed');
-    });
+    this.$container.html(app.loadHTML('layt_login'));
+    loginForm.attach(this.$container.find('.login_form'));
   };
 
   return LoginController;

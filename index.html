@@ -8,6 +8,15 @@
 <body>
   <div id="main"></div>
 
+  <script id="layt_login" type="text/x-template">
+    <div class="login_form"></div>
+  </script>
+
+  <script id="layt_feed" type="text/x-template">
+    <div class="song_list"></div>
+    <div class="friend_list"></div>
+  </script>
+
   <script id="tmpl_login_form" type="text/x-template">
     <div data-bind="error"></div>
     <form data-event="submit:login">
@@ -21,12 +30,22 @@
     </form>
   </script>
 
-  <script id="tmpl_feed" type="text/x-template">
-    <h4>Feed</h4>
+  <script id="tmpl_songs" type="text/x-template">
+    <h4>Songs</h4>
     <div data-bind="error"></div>
     <ul>
-      <li data-iterator="song:feed">
+      <li data-iterator="song:songs">
         <div data-bind="song.url"></div>
+      </li>
+    </ul>
+  </script>
+
+  <script id="tmpl_friends" type="text/x-template">
+    <h4>Friends</h4>
+    <div data-bind="error"></div>
+    <ul>
+      <li data-iterator="friend:friends">
+        <div data-bind="friend.email"></div>
       </li>
     </ul>
   </script>

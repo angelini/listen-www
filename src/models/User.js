@@ -8,9 +8,6 @@ function(Cola, Song) {
   function User(id, email) {
     this.id    = new Cola.Property(id);
     this.email = new Cola.Property(email);
-
-    this.friends = new Cola.Property([]);
-    this.feed    = new Cola.Property([]);
   }
 
   User.login = function(client, email, password, callback) {
@@ -28,7 +25,7 @@ function(Cola, Song) {
       if (err) return callback(err);
 
       var friends = response.map(function(friend) { return new User(friend.id, friend.email); });
-      callback(null, self.friends.set(friends));
+      callback(null, friends);
     });
   };
 
@@ -39,7 +36,7 @@ function(Cola, Song) {
       if (err) return callback(err);
 
       var feed = response.map(function(song) { return new Song(song.id, song.url, song.ratings); });
-      callback(null, self.feed.set(feed));
+      callback(null, feed);
     });
   };
 
