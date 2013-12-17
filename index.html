@@ -17,6 +17,11 @@
     <div class="friend_list"></div>
   </script>
 
+  <script id="layt_post" type="text/x-template">
+    <div class="song_form"></div>
+    <div class="friend_list"></div>
+  </script>
+
   <script id="tmpl_login_form" type="text/x-template">
     <div data-bind="error"></div>
     <form data-event="submit:login">
@@ -48,6 +53,16 @@
         <div data-bind="friend.email"></div>
       </li>
     </ul>
+  </script>
+
+  <script id="tmpl_song_form" type="text/x-template">
+    <div data-bind="error"></div>
+    <form data-event="submit:post">
+      <label>URL
+        <input type="text" name="url" data-bind="url"/>
+      </label>
+      <input type="submit" value="Post"/>
+    </form>
   </script>
 </body>
 </html>

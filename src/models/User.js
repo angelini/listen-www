@@ -1,9 +1,10 @@
 define([
+  'underscore',
   'Cola',
   'models/Song'
 ],
 
-function(Cola, Song) {
+function(_, Cola, Song) {
 
   function User(id, email) {
     this.id    = new Cola.Property(id);
