@@ -4,6 +4,7 @@ require.config({
   paths: {
     jQuery:     '../vendor/jquery',
     underscore: '../vendor/underscore',
+    cookie:     '../vendor/jquery.cookie',
     Cola:       '../vendor/cola'
   },
 
@@ -14,6 +15,10 @@ require.config({
 
     jQuery: {
       exports: '$'
+    },
+
+    cookie: {
+      deps: ['jQuery']
     }
   }
 });

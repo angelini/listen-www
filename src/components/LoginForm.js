@@ -1,5 +1,6 @@
 define([
   'Cola',
+
   'models/User',
   'views/LoginFormView'
 ],
