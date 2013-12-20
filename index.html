@@ -50,6 +50,7 @@
     <div data-bind="error"></div>
     <ul>
       <li data-iterator="friend:friends">
+        <input type="checkbox" data-bind="friend.selected" />
         <div data-bind="friend.email"></div>
       </li>
     </ul>

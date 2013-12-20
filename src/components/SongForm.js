@@ -18,6 +18,10 @@ function(_, Cola, Song, SongFormView) {
         url     = new Cola.Property(),
         friends = new Cola.Property([]);
 
+    this.controller.on('friends:selected', function(friendList) {
+      friends.set(friendList);
+    });
+
     var songFormView = new SongFormView(this);
     $handle.html(songFormView.render(error, url, friends));
   };

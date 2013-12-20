@@ -1,16 +1,20 @@
 define([
+  'underscore',
   'cookie',
+  'Cola',
 
   'models/User',
   'components/LoginForm',
 ],
 
-function(cookie, User, LoginForm) {
+function(_, cookie, Cola, User, LoginForm) {
 
   function LoginController(client, $container) {
     this.client     = client;
     this.$container = $container;
   }
+
+  _.extend(LoginController.prototype, Cola.EventEmitter.prototype);
 
   LoginController.prototype.login = function() {
     if (this.checkCookies()) return;

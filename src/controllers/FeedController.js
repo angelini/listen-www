@@ -1,14 +1,19 @@
 define([
+  'underscore',
+  'Cola',
+
   'components/SongList',
   'components/FriendList'
 ],
 
-function(SongList, FriendList) {
+function(_, Cola, SongList, FriendList) {
 
   function FeedController(client, $container) {
     this.client     = client;
     this.$container = $container;
   }
+
+  _.extend(FeedController.prototype, Cola.EventEmitter.prototype);
 
   FeedController.prototype.feed = function() {
     if (!app.user.get()) {

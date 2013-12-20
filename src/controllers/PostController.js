@@ -1,14 +1,19 @@
 define([
+  'underscore',
+  'Cola',
+
   'components/SongForm',
   'components/FriendList'
 ],
 
-function(SongForm, FriendList) {
+function(_, Cola, SongForm, FriendList) {
 
   function PostController(client, $container) {
     this.client     = client;
     this.$container = $container;
   }
+
+  _.extend(PostController.prototype, Cola.EventEmitter.prototype);
 
   PostController.prototype.post = function() {
     if (!app.user.get()) {
@@ -21,7 +26,9 @@ function(SongForm, FriendList) {
     this.$container.html(app.loadHTML('layt_post'));
 
     songForm.attach(this.$container.find('.song_form'));
-    friendList.attach(this.$container.find('.friend_list'));
+    friendList.attach(this.$container.find('.friend_list'), {
+      emitSelected: true
+    });
   };
 
   return PostController;
